@@ -50,7 +50,7 @@ ULONG GetPoolTag()
 
 void* RtlAllocateMemory(bool InZeroMemory, SIZE_T InSize)
 {
-    void* Result = ExAllocatePoolWithTag(NonPagedPool, InSize, GetPoolTag());
+    void* Result = ExAllocatePool2(POOL_FLAG_NON_PAGED, InSize, GetPoolTag());
     if(InZeroMemory && (Result != NULL))
         RtlZeroMemory(Result, InSize);
     return Result;
